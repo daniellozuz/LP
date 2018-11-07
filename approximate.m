@@ -10,3 +10,6 @@ fit_function = fit(data(:, 2), inductance, fit_type, 'StartPoint', start_point);
 hold on;
 plot(distance, fit_function(distance));
 plot(distance, inductance, 'r.');
+
+% Pochodna robi sie tak:
+differentiate(fit_function, [1, 2, 3])
