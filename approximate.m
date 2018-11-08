@@ -12,4 +12,4 @@ plot(distance, fit_function(distance));
 plot(distance, inductance, 'r.');
 
 % Pochodna robi sie tak:
-differentiate(fit_function, [1, 2, 3])
+differentiate(fit_function, [1, 2, 3]);

@@ -1,5 +1,5 @@
 g = 9.81;
-m = 0.06;        % fix it
+m = 0.057;
 i_s = 1.506;     % fix it?
 k = 0.29703;
 tau = 10.7;
@@ -11,8 +11,7 @@ A = [0 1 0;
 
 B = [0; 0; 8.9];
 
+Rlq = 1;
+Qlq = eye(length(B));
 
-
-
-
-
+K = lqr(A, B, Qlq, Rlq);
