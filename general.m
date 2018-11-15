@@ -1,6 +1,8 @@
 clear all;
 close all;
 
+load('ML_Sensor.mat');
+
 % Data to approx line
 a = 0.1017;
 b = 0.01801;
@@ -17,7 +19,7 @@ first = @(x1)(c*b*exp(c*x1));
 second = @(x1)(c*c*b*exp(c*x1));
 
 % Calculating x_0
-x1_0 = 0.005;
+x1_0 = 0.01;
 x2_0 = 0;
 x3_0 = sqrt((-2*m*g)/first(x1_0));
 u_0 = R*x3_0;
@@ -53,4 +55,4 @@ B = [0
 Q = eye(size(A));
 R = 1;
 
-[K,~,~] = lqr(A,B,Q,R,0);
+[K,~,~] = lqr(A,B,Q,R);
