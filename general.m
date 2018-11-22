@@ -19,7 +19,7 @@ first = @(x1)(c*b*exp(c*x1));
 second = @(x1)(c*c*b*exp(c*x1));
 
 % Calculating x_0
-x1_0 = 0.01;
+x1_0 = 0.005;
 x2_0 = 0;
 x3_0 = sqrt((-2*m*g)/first(x1_0));
 u_0 = R*x3_0;
@@ -36,7 +36,7 @@ A22 = 0;
 A23 = first(x1_0)*x3_0/m;
 
 A31 = 0;
-A32 = first(x1_0)*x3_0/(base(x1_0));
+A32 = -first(x1_0)*x3_0/(base(x1_0));
 A33 = - R/base(x1_0);
 
 A = [A11, A12, A13
@@ -53,6 +53,6 @@ B = [0
 
 % Designing LQR
 Q = eye(size(A));
-R = 1;
+Rrrr = 1;
 
-[K,~,~] = lqr(A,B,Q,R);
+[K,~,~] = lqr(A,B,Q,Rrrr);
