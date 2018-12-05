@@ -1,8 +1,6 @@
 clear all;
 close all;
 
-load('ML_Sensor.mat');
-
 % Data to approx line
 a = 0.1017;
 b = 0.01801;
@@ -19,7 +17,7 @@ first = @(x1)(c*b*exp(c*x1));
 second = @(x1)(c*c*b*exp(c*x1));
 
 % Calculating x_0
-x1_0 = 0.01;
+x1_0 = 0.005;
 x2_0 = 0;
 x3_0 = sqrt((-2*m*g)/first(x1_0));
 u_0 = R*x3_0;
@@ -36,12 +34,15 @@ A22 = 0;
 A23 = first(x1_0)*x3_0/m;
 
 A31 = 0;
-A32 = first(x1_0)*x3_0/(base(x1_0));
+A32 = -first(x1_0)*x3_0/(base(x1_0));
 A33 = - R/base(x1_0);
 
 A = [A11, A12, A13
     A21, A22, A23
     A31, A32, A33];
+
+A_guys = [0 1 0; 1612.688 0 -24.25; 0 12.52 -36.848];
+B_guys = [0; 0; 8.9];
 
 % Calculating B matrix
 
@@ -51,14 +52,12 @@ B = [0
     0
     B31];
 
-C = [1 1 1];
-D = 0;
-
 % Designing LQR
-%Q = eye(size(A)+1) .* 1000;
-Q = eye(size(A)) .* 1000;
-Rrrr = 0.95;
+Q = eye(size(A));
+R_lqr = 1;
 
-[K,~,~] = lqr(A,B,Q,Rrrr);
-%sys = ss(A,B,C,D);
-%[K,~,~] = lqi(sys,Q,Rrrr, [1;1;1;1]);
+Q_guys = eye(size(A));
+R_guys = 1;
+
+[K,~,~] = lqr(A,B,Q,R_lqr);
+[K_guys,~,~] = lqr(A_guys,B_guys,Q_guys,R_guys);
